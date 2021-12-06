@@ -1,28 +1,44 @@
 <html>
     <head>
         <title>
-            To-Do
+            To-do
         </title>
-        <link href="/styles.css" rel="stylesheet"/>
+        
+        <%- include("static/styles.ejs"); %>
     </head>
+    
     <body>
+       
+          
         <h1>
-            My To-Do List
+            My To-do list
         </h1>
         <form action="/addToDo" method="POST">
-            <input type="text" name="newtodo" placeholder="add new item">
-            <button>
-                Add To-Do
+            <input type = "text" name="newtodo" placeholder="add new item ">
+            <button type = 'submit'>
+                Add To-Do 
             </button>
             <h2>
-                Added To-Do
+                Current Tasks
             </h2>
+            <% for(var i = 0; i< tasks.length; i++){ %>
+                <li><input type="checkbox" name="check" value="<%= tasks[i]._id %>" /> <%= tasks[i].item %></li>
+            <%} %>
+        
             <button formaction="/removeToDo" type="submit">
                 Remove
             </button>
         </form>
+        <form action='/deleteToDo'' method="POST">
         <h2>
-            Completed
+            Completed Tasks
         </h2>
+        <% for(var i = 0; i< completed.length; i++){ %>
+            <li><input type="checkbox" name="delete" value= "<%= completed[i]._id %>" /> <%= completed[i].item %></li>
+        <% } %>
+        <button formaction='/deleteToDo' type="submit">
+            Delete
+        </button>
+    </form>
     </body>
 </html>
